@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conference Agenda Analyzer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Initialize PDF.js worker
+        pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Side Navigation -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <i class="bi bi-calendar-event"></i>
+                <span>CongressAI</span>
+            </div>
+            
+            <div class="sidebar-menu">
+                <button class="nav-item active" data-section="upload-section">
+                    <i class="bi bi-upload"></i>
+                    <span>Upload</span>
+                </button>
+                <button class="nav-item" data-section="summary-section">
+                    <i class="bi bi-file-text"></i>
+                    <span>Summary</span>
+                </button>
+                <button class="nav-item" data-section="topics-section">
+                    <i class="bi bi-diagram-3"></i>
+                    <span>Topics</span>
+                </button>
+                <button class="nav-item" data-section="speakers-section">
+                    <i class="bi bi-people"></i>
+                    <span>Speakers</span>
+                </button>
+                <button class="nav-item" data-section="msl-section">
+                    <i class="bi bi-briefcase"></i>
+                    <span>MSL Prep</span>
+                </button>
+                <button class="nav-item" data-section="research-section">
+                    <i class="bi bi-robot"></i>
+                    <span>Research Bot</span>
+                </button>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-link" id="settingsBtn" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Settings Modal -->
+        <div class="modal fade" id="settingsModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Settings</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="apiKeyInput" class="form-label">Venice.ai API Key</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" id="apiKeyInput" placeholder="Enter your Venice.ai API key">
+                                <button class="btn btn-outline-secondary" type="button" id="toggleApiKey">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                            </div>
+                            <div id="apiKeyStatus" class="alert alert-info d-none mt-2">
+                                Validating API key...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="validateApiKey">Save & Validate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Content Sections -->
+            <div class="content-container">
+                <!-- Upload Section -->
+                <div id="upload-section" class="content-section active">
+                    <div class="container">
+                        <h2 class="mb-4">Upload Conference Agenda</h2>
+                        <p class="text-muted mb-4">Upload a PDF agenda to analyze the conference content, speakers, and topics.</p>
+                        
+                        <form id="uploadForm" class="mb-4">
+                            <div class="upload-area" id="dropZone">
+                                <input type="file" id="pdfFile" accept="application/pdf" class="d-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-cloud-upload mb-3" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
+                                    <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                                </svg>
+                                <h4>Drag & drop your PDF here</h4>
+                                <p class="text-muted">or</p>
+                                <button type="button" class="btn btn-primary" onclick="document.getElementById('pdfFile').click()">
+                                    Choose File
+                                </button>
+                                <p id="selectedFileName" class="mt-2 text-muted"></p>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <label for="modelSelect" class="form-label">Select AI Model</label>
+                                <select class="form-select" id="modelSelect" required>
+                                    <option value="llama-3.3-70b" selected>Loading models...</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mt-4 text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-search me-2"></i>
+                                    Analyze Agenda
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Progress Circle -->
+                        <div id="uploadProgress" class="d-none mt-4"></div>
+                        
+                        <div class="alert alert-info mt-4">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <strong>Note:</strong> This application extracts text from PDFs for analysis. For image-based PDFs or complex layouts, you may get better results by converting your PDF to an image first using a tool like ImageMagick:
+                            <code>convert -density 150 document.pdf -quality 90 document.png</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Summary Section -->
+                <section id="summary-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Agenda Summary</h2>
+                        <p>A comprehensive overview of the conference agenda.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="agendaSummary" class="summary-content">
+                                <div class="placeholder-text">Upload an agenda to see the summary</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Conference Overview</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="conferenceStats" class="stats-container">
+                                        <div class="stat-item">
+                                            <div class="stat-icon"><i class="bi bi-calendar-date"></i></div>
+                                            <div class="stat-info">
+                                                <h6>Duration</h6>
+                                                <div id="conferenceDuration">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-icon"><i class="bi bi-people"></i></div>
+                                            <div class="stat-info">
+                                                <h6>Speakers</h6>
+                                                <div id="speakerCount">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-icon"><i class="bi bi-diagram-3"></i></div>
+                                            <div class="stat-info">
+                                                <h6>Topics</h6>
+                                                <div id="topicCount">-</div>
+                                            </div>
+                                        </div>
+                                        <div class="stat-item">
+                                            <div class="stat-icon"><i class="bi bi-geo-alt"></i></div>
+                                            <div class="stat-info">
+                                                <h6>Location</h6>
+                                                <div id="conferenceLocation">-</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Key Highlights</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul id="conferenceHighlights" class="highlights-list">
+                                        <li class="placeholder-text">Upload an agenda to see highlights</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Topics Section -->
+                <section id="topics-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Topic Analysis</h2>
+                        <p>Explore the main topics and themes of the conference.</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Topic Relationships</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="topicGraph" class="graph-container">
+                                        <div class="placeholder-text">Upload an agenda to see topic relationships</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Topic Distribution</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="topicChart" class="chart-container">
+                                        <div class="placeholder-text">Upload an agenda to see topic distribution</div>
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Therapeutic Areas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="therapeuticAreas" class="tag-container">
+                                        <div class="placeholder-text">Upload an agenda to see therapeutic areas</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Conference Overview Section -->
+                <div id="overview-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Conference Overview</h2>
+                        <p>Key statistics and information about the conference.</p>
+                    </div>
+                    <div class="stats-container">
+                        <!-- Stats will be dynamically inserted here -->
+                    </div>
+                </div>
+                
+                <!-- Speaker Analysis Section -->
+                <div id="speakers-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Speaker Analysis</h2>
+                        <p>Explore information about key speakers and their expertise.</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Speaker Roles Distribution</h5>
+                                    <div class="chart-container">
+                                        <canvas id="speakerRolesChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Session Types Distribution</h5>
+                                    <div class="chart-container">
+                                        <canvas id="sessionTypesChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Speakers & Panelists</h5>
+                            <div class="search-container mb-4">
+                                <input type="text" id="speakerSearchInput" class="form-control" placeholder="Search speakers...">
+                            </div>
+                            <div id="speakersList">
+                                <!-- Speakers will be dynamically inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MSL Preparation Section -->
+                <section id="msl-section" class="content-section">
+                    <div class="section-header">
+                        <h2>MSL Preparation Guide</h2>
+                        <p>Recommendations for Medical Science Liaisons preparing for this conference.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Preparation Recommendations</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="mslPreparation" class="msl-content">
+                                <div class="placeholder-text">Upload an agenda to see MSL preparation recommendations</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Key Opinion Leaders</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul id="kolList" class="kol-list">
+                                        <li class="placeholder-text">Upload an agenda to see KOLs</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Priority Sessions</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul id="prioritySessions" class="session-list">
+                                        <li class="placeholder-text">Upload an agenda to see priority sessions</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Research Bot Section -->
+                <div id="research-section" class="content-section">
+                    <h2>Research Bot</h2>
+                    <p class="section-description">Deep dive into conference topics with AI-powered research assistance.</p>
+                    
+                    <div class="research-container">
+                        <div class="research-settings mb-4">
+                            <label for="researchModel" class="form-label">Select AI Model</label>
+                            <select class="form-select" id="researchModel">
+                                <option value="mixtral-8x7b" selected>Mixtral 8x7B</option>
+                                <option value="llama-3.3-70b">Llama 3.3 70B</option>
+                                <option value="llama-3.2-3b">Llama 3.2 3B</option>
+                            </select>
+                        </div>
+                        
+                        <div class="chat-container">
+                            <div class="chat-messages" id="chatMessages"></div>
+                            <div class="chat-input-container">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="chatInput" 
+                                           placeholder="Ask a question about the conference...">
+                                    <button class="btn btn-primary" id="sendMessage">
+                                        <i class="bi bi-send"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app.js"></script>
+
+    <!-- Venice API Chat Modal -->
+    <div class="modal fade" id="veniceApiModal" tabindex="-1" aria-labelledby="veniceApiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="veniceApiModalLabel">Venice API Chat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="veniceApiModel" class="form-label">Select Model</label>
+                        <select class="form-select" id="veniceApiModel">
+                            <option value="llama-3.3-70b" selected>Llama 3.3 70B</option>
+                            <option value="llama-3.2-3b">Llama 3.2 3B</option>
+                            <option value="dolphin-2.9.2-qwen2-72b">Dolphin 2.9.2 Qwen2 72B</option>
+                            <option value="llama-3.1-405b">Llama 3.1 405B</option>
+                            <option value="qwen-2.5-coder-32b">Qwen 2.5 Coder 32B</option>
+                            <option value="deepseek-r1-llama-70b">DeepSeek R1 Llama 70B</option>
+                            <option value="deepseek-r1-671b">DeepSeek R1 671B</option>
+                            <option value="qwen-2.5-vl">Qwen 2.5 VL 72B</option>
+                        </select>
+                    </div>
+                    <div class="chat-container">
+                        <div class="chat-messages" id="veniceApiMessages"></div>
+                        <div class="chat-input-container">
+                            <textarea class="form-control" id="veniceApiInput" rows="3" placeholder="Type your message..."></textarea>
+                            <button class="btn btn-primary mt-2" id="veniceApiSend">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add a button to open the Venice API Chat in the research section -->
+    <div class="mb-3">
+        <button class="btn btn-primary" id="veniceApiChat">
+            <i class="bi bi-chat-dots"></i> Open Venice API Chat
+        </button>
+    </div>
+</body>
+</html> 
