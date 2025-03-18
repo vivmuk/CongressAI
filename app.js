@@ -1944,3 +1944,66 @@ function setupDragAndDrop(dropZone, fileInput, selectedFileName) {
         }
     }
 }
+
+// Function to load example agendas
+async function loadExampleAgenda(filename) {
+    try {
+        // Fetch the example PDF file
+        const response = await fetch(filename);
+        if (!response.ok) {
+            throw new Error(`Failed to load example agenda: ${response.statusText}`);
+        }
+        
+        // Convert the response to a blob
+        const blob = await response.blob();
+        
+        // Create a File object from the blob
+        const file = new File([blob], filename, { type: 'application/pdf' });
+        
+        // Update the file input and selected file name display
+        const fileInput = document.getElementById('pdfFile');
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(file);
+        fileInput.files = dataTransfer.files;
+        
+        // Update the UI to show the selected file
+        const selectedFileName = document.getElementById('selectedFileName');
+        const dropZone = document.getElementById('dropZone');
+        
+        selectedFileName.innerHTML = `
+            <div class="selected-file">
+                <i class="bi bi-file-pdf me-2"></i>
+                <span>${filename}</span>
+            </div>
+        `;
+        selectedFileName.style.color = 'var(--success-color)';
+        dropZone.classList.remove('border-danger');
+        dropZone.classList.add('border-success');
+        
+        // Add success message
+        const uploadStatus = document.querySelector('.upload-status');
+        if (uploadStatus) {
+            uploadStatus.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Example agenda loaded successfully: ${filename}
+                </div>
+            `;
+        }
+        
+        // Automatically submit the form to start analysis
+        document.getElementById('uploadForm').dispatchEvent(new Event('submit'));
+        
+    } catch (error) {
+        console.error('Error loading example agenda:', error);
+        const uploadStatus = document.querySelector('.upload-status');
+        if (uploadStatus) {
+            uploadStatus.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    Error loading example agenda: ${error.message}
+                </div>
+            `;
+        }
+    }
+}

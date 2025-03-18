@@ -105,6 +105,26 @@
                         <h2 class="mb-4">Upload Conference Agenda</h2>
                         <p class="text-muted mb-4">Upload a PDF agenda to analyze the conference content, speakers, and topics.</p>
                         
+                        <!-- Example Agendas Section -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">Example Agendas</h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted mb-3">Try out the analyzer with one of our example conference agendas:</p>
+                                <div class="d-flex gap-3">
+                                    <button type="button" class="btn btn-outline-primary" onclick="loadExampleAgenda('Next Pharma.pdf')">
+                                        <i class="bi bi-file-pdf me-2"></i>
+                                        Next Pharma Conference
+                                    </button>
+                                    <button type="button" class="btn btn-outline-primary" onclick="loadExampleAgenda('FLASCO.pdf')">
+                                        <i class="bi bi-file-pdf me-2"></i>
+                                        FLASCO Conference
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <form id="uploadForm" class="mb-4">
                             <div class="upload-area" id="dropZone">
                                 <input type="file" id="pdfFile" accept="application/pdf" class="d-none">
