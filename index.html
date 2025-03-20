@@ -55,6 +55,18 @@
                     <i class="bi bi-robot"></i>
                     <span>Research Bot</span>
                 </button>
+                <button class="nav-item" data-section="deep-insights-section">
+                    <i class="bi bi-graph-up"></i>
+                    <span>Deep Insights</span>
+                </button>
+                <button class="nav-item" data-section="competitive-intel-section">
+                    <i class="bi bi-building"></i>
+                    <span>Competitive Intel</span>
+                </button>
+                <button class="nav-item" data-section="post-congress-section">
+                    <i class="bi bi-journal-check"></i>
+                    <span>Post-Congress</span>
+                </button>
             </div>
 
             <div class="sidebar-footer">
@@ -389,9 +401,9 @@
                         <div class="research-settings mb-4">
                             <label for="researchModel" class="form-label">Select AI Model</label>
                             <select class="form-select" id="researchModel">
-                                <option value="mixtral-8x7b" selected>Mixtral 8x7B</option>
-                                <option value="llama-3.3-70b">Llama 3.3 70B</option>
+                                <option value="llama-3.3-70b" selected>Llama 3.3 70B</option>
                                 <option value="llama-3.2-3b">Llama 3.2 3B</option>
+                                <option value="mistral-31-24b">Mistral 3.1 24B</option>
                             </select>
                         </div>
                         
@@ -409,6 +421,541 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Deep Insights Section -->
+                <div id="deep-insights-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Deep Insights</h2>
+                        <p>Advanced analysis of abstract submission patterns and trends.</p>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            <strong>MOCKUP:</strong> This is a demonstration of potential features. Real implementation requires abstract data integration.
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5>Abstract Submission Tracker</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Replace canvas with static chart -->
+                                    <div class="static-chart">
+                                        <div class="chart-bars">
+                                            <div class="chart-bar" style="height: 100%; background-color: #36A2EB;">
+                                                <div class="chart-value">56</div>
+                                                <div class="chart-label">Total</div>
+                                            </div>
+                                            <div class="chart-bar" style="height: 66%; background-color: #28a745;">
+                                                <div class="chart-value">37</div>
+                                                <div class="chart-label">Accepted</div>
+                                            </div>
+                                            <div class="chart-bar" style="height: 25%; background-color: #dc3545;">
+                                                <div class="chart-value">14</div>
+                                                <div class="chart-label">Rejected</div>
+                                            </div>
+                                            <div class="chart-bar" style="height: 9%; background-color: #ffc107;">
+                                                <div class="chart-value">5</div>
+                                                <div class="chart-label">Pending</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <small>Data represents internal abstract submissions for ASCO 2023</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5>Abstract Status</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Replace stats container and canvas with card-based layout -->
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="status-card">
+                                                <div class="status-icon bg-success">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </div>
+                                                <div class="status-info">
+                                                    <div class="status-title">Accepted</div>
+                                                    <div class="status-value">37</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="status-card">
+                                                <div class="status-icon bg-danger">
+                                                    <i class="bi bi-x-circle"></i>
+                                                </div>
+                                                <div class="status-info">
+                                                    <div class="status-title">Rejected</div>
+                                                    <div class="status-value">14</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="status-card">
+                                                <div class="status-icon bg-warning">
+                                                    <i class="bi bi-hourglass-split"></i>
+                                                </div>
+                                                <div class="status-info">
+                                                    <div class="status-title">Pending</div>
+                                                    <div class="status-value">5</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="status-card">
+                                                <div class="status-icon bg-info">
+                                                    <i class="bi bi-star"></i>
+                                                </div>
+                                                <div class="status-info">
+                                                    <div class="status-title">Oral Presentations</div>
+                                                    <div class="status-value">12</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Oncology Subspecialty Representation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <canvas id="subspecialtyChart" height="300"></canvas>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <h6 class="mb-3">Key Drug Categories</h6>
+                                            <ul class="category-list">
+                                                <li>
+                                                    <span class="category-badge" style="background-color: #FF6384;">Small Molecules</span>
+                                                    <span class="category-count">23 abstracts</span>
+                                                </li>
+                                                <li>
+                                                    <span class="category-badge" style="background-color: #36A2EB;">Monoclonal Antibodies</span>
+                                                    <span class="category-count">18 abstracts</span>
+                                                </li>
+                                                <li>
+                                                    <span class="category-badge" style="background-color: #FFCE56;">CAR-T Therapies</span>
+                                                    <span class="category-count">15 abstracts</span>
+                                                </li>
+                                                <li>
+                                                    <span class="category-badge" style="background-color: #4BC0C0;">Antibody-Drug Conjugates</span>
+                                                    <span class="category-count">12 abstracts</span>
+                                                </li>
+                                                <li>
+                                                    <span class="category-badge" style="background-color: #9966FF;">Checkpoint Inhibitors</span>
+                                                    <span class="category-count">11 abstracts</span>
+                                                </li>
+                                                <li>
+                                                    <span class="category-badge" style="background-color: #FF9F40;">BiTE Therapies</span>
+                                                    <span class="category-count">7 abstracts</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Competitive Intelligence Section -->
+                <div id="competitive-intel-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Competitive Intelligence</h2>
+                        <p>Analysis of competitive landscape across abstract submissions and presentations.</p>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            <strong>MOCKUP:</strong> This is a demonstration using example data. Real implementation would use actual congress data.
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-7">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5>GI Oncology - Company Representation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="companyRepChart" height="300"></canvas>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <small>Based on accepted abstracts at ASCO GI 2023</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5>Top 5 Companies by Presentation Type</h5>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Company</th>
+                                                <th>Oral</th>
+                                                <th>Poster</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Roche/Genentech</td>
+                                                <td>8</td>
+                                                <td>16</td>
+                                                <td>24</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Merck</td>
+                                                <td>7</td>
+                                                <td>15</td>
+                                                <td>22</td>
+                                            </tr>
+                                            <tr>
+                                                <td>AstraZeneca</td>
+                                                <td>6</td>
+                                                <td>13</td>
+                                                <td>19</td>
+                                            </tr>
+                                            <tr>
+                                                <td>BMS</td>
+                                                <td>5</td>
+                                                <td>12</td>
+                                                <td>17</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pfizer</td>
+                                                <td>4</td>
+                                                <td>10</td>
+                                                <td>14</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>GI Cancer Types - Study Phase Distribution</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <canvas id="cancerTypeChart" height="300"></canvas>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="phase-legend">
+                                                <h6>Study Phases</h6>
+                                                <div class="phase-item">
+                                                    <span class="phase-color" style="background-color: #FF6384;"></span>
+                                                    <span>Phase I</span>
+                                                </div>
+                                                <div class="phase-item">
+                                                    <span class="phase-color" style="background-color: #36A2EB;"></span>
+                                                    <span>Phase II</span>
+                                                </div>
+                                                <div class="phase-item">
+                                                    <span class="phase-color" style="background-color: #FFCE56;"></span>
+                                                    <span>Phase III</span>
+                                                </div>
+                                                <div class="phase-item">
+                                                    <span class="phase-color" style="background-color: #4BC0C0;"></span>
+                                                    <span>Phase IV</span>
+                                                </div>
+                                                <div class="phase-item">
+                                                    <span class="phase-color" style="background-color: #9966FF;"></span>
+                                                    <span>Real-World Evidence</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Key Mechanisms of Action</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="moaChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Biomarker Utilization</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="biomarkerChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Post-Congress Section -->
+                <div id="post-congress-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Post-Congress Analysis</h2>
+                        <p>Comprehensive analysis of presented data and insights from the congress.</p>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle-fill me-2"></i>
+                            <strong>MOCKUP:</strong> This demonstration shows how GenAI can analyze various unstructured data sources post-congress.
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h5>Congress Data Sources</h5>
+                                    <button class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-upload me-1"></i> Upload New Data
+                                    </button>
+                                </div>
+                                <div class="card-body">
+                                    <div class="data-sources">
+                                        <div class="data-source-item">
+                                            <div class="data-source-icon"><i class="bi bi-file-earmark-pdf"></i></div>
+                                            <div class="data-source-info">
+                                                <h6>Presentation PDFs</h6>
+                                                <div class="data-source-meta">27 files processed</div>
+                                            </div>
+                                            <div class="data-source-status text-success">
+                                                <i class="bi bi-check-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div class="data-source-item">
+                                            <div class="data-source-icon"><i class="bi bi-file-earmark-ppt"></i></div>
+                                            <div class="data-source-info">
+                                                <h6>PowerPoint Presentations</h6>
+                                                <div class="data-source-meta">43 files processed</div>
+                                            </div>
+                                            <div class="data-source-status text-success">
+                                                <i class="bi bi-check-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div class="data-source-item">
+                                            <div class="data-source-icon"><i class="bi bi-image"></i></div>
+                                            <div class="data-source-info">
+                                                <h6>Poster Images</h6>
+                                                <div class="data-source-meta">65 files processed</div>
+                                            </div>
+                                            <div class="data-source-status text-success">
+                                                <i class="bi bi-check-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div class="data-source-item">
+                                            <div class="data-source-icon"><i class="bi bi-file-earmark-text"></i></div>
+                                            <div class="data-source-info">
+                                                <h6>MSL Field Notes</h6>
+                                                <div class="data-source-meta">19 files processed</div>
+                                            </div>
+                                            <div class="data-source-status text-success">
+                                                <i class="bi bi-check-circle"></i>
+                                            </div>
+                                        </div>
+                                        <div class="data-source-item">
+                                            <div class="data-source-icon"><i class="bi bi-file-earmark-medical"></i></div>
+                                            <div class="data-source-info">
+                                                <h6>Clinical Trial Updates</h6>
+                                                <div class="data-source-meta">31 files processed</div>
+                                            </div>
+                                            <div class="data-source-status text-success">
+                                                <i class="bi bi-check-circle"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-7">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5>Newly Released Data by Company</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="newDataReleasesChart" height="300"></canvas>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <small>Representing previously unreleased data from ASCO 2023</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5>Top Breakthrough Announcements</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="breakthrough-list">
+                                        <li>
+                                            <div class="breakthrough-company">Merck</div>
+                                            <div class="breakthrough-title">KEYNOTE-811: Pembrolizumab + trastuzumab shows 27% risk reduction in HER2+ gastric cancer</div>
+                                        </li>
+                                        <li>
+                                            <div class="breakthrough-company">AstraZeneca</div>
+                                            <div class="breakthrough-title">TROPION-Lung01: Datopotamab deruxtecan achieves 34% response rate in previously treated NSCLC</div>
+                                        </li>
+                                        <li>
+                                            <div class="breakthrough-company">Roche</div>
+                                            <div class="breakthrough-title">IMpower010: 5-year survival data shows sustained benefit of adjuvant atezolizumab in NSCLC</div>
+                                        </li>
+                                        <li>
+                                            <div class="breakthrough-company">BMS</div>
+                                            <div class="breakthrough-title">CheckMate 648: First-line nivolumab + chemotherapy shows improved survival in esophageal SCC</div>
+                                        </li>
+                                        <li>
+                                            <div class="breakthrough-company">Pfizer</div>
+                                            <div class="breakthrough-title">JAVELIN Bladder 100: Long-term follow-up confirms survival benefit of avelumab maintenance</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>MSL Insights Analysis</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Replace canvas with static chart -->
+                                    <div class="static-horizontal-chart">
+                                        <div class="horizontal-chart-item">
+                                            <div class="horizontal-label">Treatment Approaches</div>
+                                            <div class="horizontal-bar-container">
+                                                <div class="horizontal-bar" style="width: 100%; background-color: #4BC0C0;">
+                                                    <span class="horizontal-value">35</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="horizontal-chart-item">
+                                            <div class="horizontal-label">Biomarkers</div>
+                                            <div class="horizontal-bar-container">
+                                                <div class="horizontal-bar" style="width: 80%; background-color: #4BC0C0;">
+                                                    <span class="horizontal-value">28</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="horizontal-chart-item">
+                                            <div class="horizontal-label">Adverse Events</div>
+                                            <div class="horizontal-bar-container">
+                                                <div class="horizontal-bar" style="width: 63%; background-color: #4BC0C0;">
+                                                    <span class="horizontal-value">22</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="horizontal-chart-item">
+                                            <div class="horizontal-label">Pipeline Interest</div>
+                                            <div class="horizontal-bar-container">
+                                                <div class="horizontal-bar" style="width: 51%; background-color: #4BC0C0;">
+                                                    <span class="horizontal-value">18</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="horizontal-chart-item">
+                                            <div class="horizontal-label">Competitive Data</div>
+                                            <div class="horizontal-bar-container">
+                                                <div class="horizontal-bar" style="width: 43%; background-color: #4BC0C0;">
+                                                    <span class="horizontal-value">15</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="horizontal-chart-item">
+                                            <div class="horizontal-label">Patient Management</div>
+                                            <div class="horizontal-bar-container">
+                                                <div class="horizontal-bar" style="width: 34%; background-color: #4BC0C0;">
+                                                    <span class="horizontal-value">12</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center mt-3">
+                                        <small class="text-muted">Based on 74 MSL field reports from the congress</small>
+                                    </div>
+                                    <div class="insights-summary mt-3">
+                                        <h6>Key MSL Insights:</h6>
+                                        <ul>
+                                            <li>Strong KOL interest in novel biomarker-driven treatment approaches</li>
+                                            <li>Increased queries about combination therapies with immune checkpoint inhibitors</li>
+                                            <li>Rising concerns about managing adverse events from novel therapies</li>
+                                            <li>High engagement at sessions covering early pipeline compounds</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Post-Congress Report</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="report-preview">
+                                        <div class="report-header">
+                                            <h6>ASCO 2023 - Executive Summary</h6>
+                                            <p class="text-muted">Generated by CongressAI on June 15, 2023</p>
+                                        </div>
+                                        <div class="report-content">
+                                            <p>The 2023 ASCO Annual Meeting showcased significant advances in oncology treatments with particular emphasis on precision medicine approaches and novel immunotherapy combinations. Three major themes emerged:</p>
+                                            
+                                            <ol>
+                                                <li>
+                                                    <strong>Biomarker-driven therapeutic strategies</strong> continue to refine patient selection and improve outcomes across multiple tumor types.
+                                                </li>
+                                                <li>
+                                                    <strong>Novel ADCs (antibody-drug conjugates)</strong> demonstrated promising efficacy in previously treatment-resistant cancers.
+                                                </li>
+                                                <li>
+                                                    <strong>Combination immunotherapy approaches</strong> showed improved durability of response in advanced disease settings.
+                                                </li>
+                                            </ol>
+                                            
+                                            <p>Key data included landmark survival improvements in early-stage lung cancer and groundbreaking results in triple-negative breast cancer treatments...</p>
+                                        </div>
+                                        <div class="report-actions">
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-file-earmark-text me-1"></i> View Full Report
+                                            </button>
+                                            <button class="btn btn-sm btn-outline-secondary">
+                                                <i class="bi bi-download me-1"></i> Download PDF
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -416,6 +963,24 @@
     <!-- Add Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="app.js"></script>
+
+    <!-- Initialize charts after the page loads -->
+    <script>
+        window.onload = function() {
+            // Make sure charts are initialized
+            setTimeout(() => {
+                if (typeof initializeDeepInsightsCharts === 'function') {
+                    initializeDeepInsightsCharts();
+                }
+                if (typeof initializeCompetitiveIntelCharts === 'function') {
+                    initializeCompetitiveIntelCharts();
+                }
+                if (typeof initializePostCongressCharts === 'function') {
+                    initializePostCongressCharts();
+                }
+            }, 1000);
+        };
+    </script>
 
     <!-- Venice API Chat Modal -->
     <div class="modal fade" id="veniceApiModal" tabindex="-1" aria-labelledby="veniceApiModalLabel" aria-hidden="true">
@@ -431,12 +996,13 @@
                         <select class="form-select" id="veniceApiModel">
                             <option value="llama-3.3-70b" selected>Llama 3.3 70B</option>
                             <option value="llama-3.2-3b">Llama 3.2 3B</option>
+                            <option value="mistral-31-24b">Mistral 3.1 24B</option>
                             <option value="dolphin-2.9.2-qwen2-72b">Dolphin 2.9.2 Qwen2 72B</option>
                             <option value="llama-3.1-405b">Llama 3.1 405B</option>
                             <option value="qwen-2.5-coder-32b">Qwen 2.5 Coder 32B</option>
-                            <option value="deepseek-r1-llama-70b">DeepSeek R1 Llama 70B</option>
                             <option value="deepseek-r1-671b">DeepSeek R1 671B</option>
                             <option value="qwen-2.5-vl">Qwen 2.5 VL 72B</option>
+                            <option value="qwen-2.5-qwq-32b">Qwen 2.5 QwQ 32B</option>
                         </select>
                     </div>
                     <div class="chat-container">

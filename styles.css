@@ -1417,4 +1417,319 @@ h1, h2, h3, h4, h5, h6 {
 
 .text-muted {
     color: var(--text-muted) !important;
+}
+
+/* Deep Insights Section Styles */
+.category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.category-list li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.category-count {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Competitive Intelligence Section Styles */
+.phase-legend {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.phase-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.phase-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Post-Congress Section Styles */
+.data-sources {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.data-source-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.data-source-item:hover {
+    background-color: #e9ecef;
+}
+
+.data-source-icon {
+    font-size: 24px;
+    color: #6c757d;
+    margin-right: 15px;
+    width: 40px;
+    text-align: center;
+}
+
+.data-source-info {
+    flex: 1;
+}
+
+.data-source-info h6 {
+    margin-bottom: 2px;
+}
+
+.data-source-meta {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.data-source-status {
+    font-size: 18px;
+    width: 30px;
+    text-align: center;
+}
+
+.breakthrough-list {
+    list-style: none;
+    padding: 0;
+}
+
+.breakthrough-list li {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.breakthrough-list li:last-child {
+    border-bottom: none;
+}
+
+.breakthrough-company {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 5px;
+}
+
+.breakthrough-title {
+    font-size: 14px;
+    color: #343a40;
+}
+
+.report-preview {
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.report-header {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.report-header h6 {
+    margin-bottom: 5px;
+}
+
+.report-content {
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.report-actions {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+}
+
+.insights-summary {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.insights-summary ul {
+    margin-bottom: 0;
+}
+
+.insights-summary li {
+    margin-bottom: 8px;
+}
+
+.insights-summary li:last-child {
+    margin-bottom: 0;
+}
+
+/* Static Charts for Deep Insights and Post Congress sections */
+.static-chart {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 20px 10px;
+}
+
+.chart-bars {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+}
+
+.chart-bar {
+    width: 60px;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    transition: all 0.3s ease;
+}
+
+.chart-bar:hover {
+    filter: brightness(1.1);
+}
+
+.chart-value {
+    position: absolute;
+    top: -25px;
+    font-weight: bold;
+    color: #333;
+}
+
+.chart-label {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #666;
+    position: absolute;
+    bottom: -25px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Horizontal Bar Chart */
+.static-horizontal-chart {
+    padding: 20px 0;
+}
+
+.horizontal-chart-item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.horizontal-label {
+    width: 35%;
+    padding-right: 10px;
+    text-align: right;
+    font-size: 13px;
+    color: #555;
+}
+
+.horizontal-bar-container {
+    width: 65%;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.horizontal-bar {
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    transition: width 0.5s ease;
+}
+
+.horizontal-value {
+    margin-right: 5px;
+}
+
+/* Abstract Status Card Layout */
+.status-card {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    height: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.status-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.status-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.status-info {
+    flex: 1;
+}
+
+.status-title {
+    font-size: 14px;
+    color: #495057;
+    margin-bottom: 3px;
+}
+
+.status-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: #212529;
+}
+
+/* Fix for chart labels in Abstract Tracker */
+.chart-bar .chart-label {
+    bottom: -25px;
+    width: 100%;
+    white-space: nowrap;
 } 

@@ -5,15 +5,15 @@ const API_URL = `${BASE_URL}/api/v1`;
 
 // Available models configuration
 const DEFAULT_MODELS = [
-    { id: 'mixtral-8x7b', name: 'Mixtral 8x7B (Recommended)', isAvailable: true },
-    { id: 'llama-3.3-70b', name: 'Llama 3.3 70B', isAvailable: true },
-    { id: 'llama-3.2-3b', name: 'Llama 3.2 3B', isAvailable: true },
-    { id: 'dolphin-2.9.2-qwen2-72b', name: 'Dolphin 2.9.2 Qwen2 72B', isAvailable: true },
-    { id: 'llama-3.1-405b', name: 'Llama 3.1 405B', isAvailable: true },
-    { id: 'qwen-2.5-coder-32b', name: 'Qwen 2.5 Coder 32B', isAvailable: true },
-    { id: 'deepseek-r1-llama-70b', name: 'DeepSeek R1 Llama 70B', isAvailable: true },
-    { id: 'deepseek-r1-671b', name: 'DeepSeek R1 671B', isAvailable: true },
-    { id: 'qwen-2.5-vl-72b', name: 'Qwen 2.5 VL 72B', isAvailable: true }
+    { id: 'llama-3.3-70b', name: 'Llama 3.3 70B', isAvailable: false },
+    { id: 'llama-3.2-3b', name: 'Llama 3.2 3B', isAvailable: false },
+    { id: 'mistral-31-24b', name: 'Mistral 3.1 24B', isAvailable: false },
+    { id: 'dolphin-2.9.2-qwen2-72b', name: 'Dolphin 2.9.2 Qwen2 72B', isAvailable: false },
+    { id: 'llama-3.1-405b', name: 'Llama 3.1 405B', isAvailable: false },
+    { id: 'qwen-2.5-coder-32b', name: 'Qwen 2.5 Coder 32B', isAvailable: false },
+    { id: 'deepseek-r1-671b', name: 'DeepSeek R1 671B', isAvailable: false },
+    { id: 'qwen-2.5-vl', name: 'Qwen 2.5 VL 72B', isAvailable: false },
+    { id: 'qwen-2.5-qwq-32b', name: 'Qwen 2.5 QwQ 32B', isAvailable: false }
 ];
 
 // Global variables to store extracted data
@@ -2007,3 +2007,451 @@ async function loadExampleAgenda(filename) {
         }
     }
 }
+
+// Function to initialize the Deep Insights mockup charts
+function initializeDeepInsightsCharts() {
+    // Ensure DOM is ready before creating charts
+    setTimeout(() => {
+        // Abstract Submission Chart - Using a simple bar chart instead of line chart
+        const abstractSubmissionCtx = document.getElementById('abstractSubmissionChart');
+        if (abstractSubmissionCtx) {
+            new Chart(abstractSubmissionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Total Submissions', 'Accepted', 'Rejected', 'Pending'],
+                    datasets: [{
+                        label: 'Abstract Submissions',
+                        data: [56, 37, 14, 5],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(40, 167, 69, 0.7)',
+                            'rgba(220, 53, 69, 0.7)',
+                            'rgba(255, 193, 7, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgb(54, 162, 235)',
+                            'rgb(40, 167, 69)',
+                            'rgb(220, 53, 69)',
+                            'rgb(255, 193, 7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Abstract Submission Summary'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Abstracts'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Abstract Status Chart - Keep as is
+        const abstractStatusCtx = document.getElementById('abstractStatusChart');
+        if (abstractStatusCtx) {
+            new Chart(abstractStatusCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Accepted', 'Rejected', 'Pending'],
+                    datasets: [{
+                        data: [37, 14, 5],
+                        backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        // Subspecialty Chart - Keep as is
+        const subspecialtyCtx = document.getElementById('subspecialtyChart');
+        if (subspecialtyCtx) {
+            new Chart(subspecialtyCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Breast', 'Lung', 'GI', 'Hematology', 'GU', 'Melanoma', 'Head & Neck'],
+                    datasets: [{
+                        label: 'Number of Abstracts',
+                        data: [25, 22, 18, 15, 12, 8, 6],
+                        backgroundColor: [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', 
+                            '#9966FF', '#FF9F40', '#C9CBCF'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Abstracts by Oncology Subspecialty'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Abstracts'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }, 100);
+}
+
+// Function to initialize the Competitive Intelligence mockup charts
+function initializeCompetitiveIntelCharts() {
+    // Ensure DOM is ready before creating charts
+    setTimeout(() => {
+        // Company Representation Chart
+        const companyRepCtx = document.getElementById('companyRepChart');
+        if (companyRepCtx) {
+            new Chart(companyRepCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Roche/Genentech', 'Merck', 'AstraZeneca', 'BMS', 'Pfizer', 'Novartis', 'GSK', 'Other'],
+                    datasets: [{
+                        label: 'Number of Abstracts',
+                        data: [24, 22, 19, 17, 14, 10, 8, 15],
+                        backgroundColor: [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', 
+                            '#9966FF', '#FF9F40', '#C9CBCF', '#8A8A8A'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Company Representation in GI Oncology Abstracts'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Abstracts'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Cancer Type Chart
+        const cancerTypeCtx = document.getElementById('cancerTypeChart');
+        if (cancerTypeCtx) {
+            new Chart(cancerTypeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Colorectal', 'Gastric/GEJ', 'Pancreatic', 'Hepatocellular', 'Esophageal', 'Biliary'],
+                    datasets: [
+                        {
+                            label: 'Phase I',
+                            data: [5, 4, 3, 4, 2, 3],
+                            backgroundColor: '#FF6384',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'Phase II',
+                            data: [8, 6, 7, 5, 4, 2],
+                            backgroundColor: '#36A2EB',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'Phase III',
+                            data: [6, 5, 4, 3, 3, 2],
+                            backgroundColor: '#FFCE56',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'Phase IV',
+                            data: [2, 1, 1, 0, 1, 0],
+                            backgroundColor: '#4BC0C0',
+                            stack: 'Stack 0'
+                        },
+                        {
+                            label: 'Real-World Evidence',
+                            data: [3, 2, 2, 1, 1, 1],
+                            backgroundColor: '#9966FF',
+                            stack: 'Stack 0'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Study Phases by GI Cancer Type'
+                        },
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Studies'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Mechanism of Action Chart
+        const moaCtx = document.getElementById('moaChart');
+        if (moaCtx) {
+            new Chart(moaCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['PD-1/PD-L1', 'VEGF/VEGFR', 'HER2', 'FGFR', 'PARP', 'CTLA-4', 'MET'],
+                    datasets: [
+                        {
+                            label: 'Abstracts Targeting MOA',
+                            data: [28, 22, 15, 12, 10, 8, 6],
+                            fill: true,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgb(54, 162, 235)',
+                            pointBackgroundColor: 'rgb(54, 162, 235)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(54, 162, 235)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0
+                        }
+                    }
+                }
+            });
+        }
+
+        // Biomarker Chart
+        const biomarkerCtx = document.getElementById('biomarkerChart');
+        if (biomarkerCtx) {
+            new Chart(biomarkerCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['MSI/dMMR', 'HER2', 'BRAF', 'KRAS/NRAS', 'FGFR', 'Other'],
+                    datasets: [{
+                        data: [25, 20, 15, 13, 10, 17],
+                        backgroundColor: [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', 
+                            '#9966FF', '#C9CBCF'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+        }
+    }, 100);
+}
+
+// Function to initialize the Post-Congress mockup charts
+function initializePostCongressCharts() {
+    // Ensure DOM is ready before creating charts
+    setTimeout(() => {
+        // New Data Releases Chart
+        const newDataReleasesCtx = document.getElementById('newDataReleasesChart');
+        if (newDataReleasesCtx) {
+            new Chart(newDataReleasesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Merck', 'Roche/Genentech', 'AstraZeneca', 'BMS', 'Pfizer', 'Novartis', 'GSK'],
+                    datasets: [{
+                        label: 'Previously Unreleased Data Points',
+                        data: [38, 35, 32, 28, 25, 20, 18],
+                        backgroundColor: [
+                            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', 
+                            '#9966FF', '#FF9F40', '#C9CBCF'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'New Data Released by Company'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Data Points'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // MSL Insights Chart - Simplified to basic horizontal bar chart
+        const mslInsightsCtx = document.getElementById('mslInsightsChart');
+        if (mslInsightsCtx) {
+            new Chart(mslInsightsCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Treatment Approaches', 
+                        'Biomarkers', 
+                        'Adverse Events', 
+                        'Pipeline Interest',
+                        'Competitive Data',
+                        'Patient Management'
+                    ],
+                    datasets: [{
+                        label: 'Number of Mentions',
+                        data: [35, 28, 22, 18, 15, 12],
+                        backgroundColor: '#4BC0C0',
+                        borderColor: '#2fa4a4',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'MSL-Reported Topics of Interest'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Frequency in MSL Reports'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }, 100);
+}
+
+// Function to initialize navigation
+function initializeNavigation() {
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const section = this.getAttribute('data-section');
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Initialize charts when navigating to their respective sections
+            if (section === 'deep-insights-section') {
+                initializeDeepInsightsCharts();
+            } else if (section === 'competitive-intel-section') {
+                initializeCompetitiveIntelCharts();
+            } else if (section === 'post-congress-section') {
+                initializePostCongressCharts();
+            }
+        });
+    });
+}
+
+// Initialize the application when document is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize the navigation
+    initializeNavigation();
+    
+    // Check API key and model availability
+    checkApiKeyAndInitialize();
+    
+    // Initialize Research Bot
+    initializeResearchBot();
+    
+    // Initialize Venice API Chat
+    initializeVeniceApiChat();
+    
+    // Initialize mockup charts for the new sections immediately
+    setTimeout(() => {
+        initializeDeepInsightsCharts();
+        initializeCompetitiveIntelCharts();
+        initializePostCongressCharts();
+    }, 500);
+});
