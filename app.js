@@ -2436,31 +2436,84 @@ function initializeNavigation() {
 
 // Handle AI Features phase selector
 function initializeAIFeaturesSection() {
-    // Setup phase selector for Medical Affairs tab
-    document.querySelectorAll('#medical .phase-selector .btn').forEach(button => {
+    document.querySelectorAll('.ai-features-nav-item').forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('data-target');
+            showTab(targetId);
+        });
+    });
+    
+    // Show default tab
+    document.getElementById('medical-affairs-tab').classList.add('active');
+    document.getElementById('medical-affairs-content').style.display = 'block';
+    
+    // Initialize the phase content
+    initializeTabPhaseContent();
+}
+
+function showTab(tabId) {
+    // Hide all content divs
+    document.querySelectorAll('.tab-content').forEach(div => {
+        div.style.display = 'none';
+    });
+    
+    // Remove active class from all tab links
+    document.querySelectorAll('.ai-features-nav-item').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Show the specific content div and add active class to the clicked tab link
+    document.getElementById(tabId + '-content').style.display = 'block';
+    document.getElementById(tabId + '-tab').classList.add('active');
+}
+
+function initializeTabPhaseContent() {
+    // Add event listeners to all phase selector buttons in the AI Features section
+    document.querySelectorAll('.phase-selector .btn').forEach(button => {
         button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            document.querySelectorAll('#medical .phase-selector .btn').forEach(btn => {
+            // Get the selected phase (pre, on, post)
+            const phase = this.getAttribute('data-phase');
+            
+            // Get the parent tab content container
+            const tabContent = this.closest('.tab-content');
+            
+            // Remove active class from all buttons in this tab
+            tabContent.querySelectorAll('.phase-selector .btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             
             // Add active class to clicked button
             this.classList.add('active');
             
-            // Get the phase from data attribute
-            const phase = this.getAttribute('data-phase');
-            
-            // Hide all phase content
-            document.querySelectorAll('#medical .phase-content').forEach(content => {
-                content.classList.add('d-none');
+            // Hide all phase contents in this tab
+            tabContent.querySelectorAll('.phase-content').forEach(content => {
+                content.style.display = 'none';
             });
             
             // Show the selected phase content
-            document.getElementById(`medical-${phase}`).classList.remove('d-none');
+            const phaseContent = tabContent.querySelector(`.phase-content[data-phase="${phase}"]`);
+            if (phaseContent) {
+                phaseContent.style.display = 'block';
+            }
         });
     });
     
-    // Add similar functionality for R&D and Marketing tabs when their content is implemented
+    // Activate pre-congress phase by default for all tabs
+    document.querySelectorAll('.tab-content').forEach(tabContent => {
+        // Find the pre-congress button in this tab
+        const preCongressButton = tabContent.querySelector('.phase-selector .btn[data-phase="pre"]');
+        if (preCongressButton) {
+            // Simulate a click on the pre-congress button
+            preCongressButton.classList.add('active');
+            
+            // Show the pre-congress phase content
+            const preCongressContent = tabContent.querySelector('.phase-content[data-phase="pre"]');
+            if (preCongressContent) {
+                preCongressContent.style.display = 'block';
+            }
+        }
+    });
 }
 
 // Initialize the application when document is loaded
