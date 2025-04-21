@@ -2434,6 +2434,35 @@ function initializeNavigation() {
     });
 }
 
+// Handle AI Features phase selector
+function initializeAIFeaturesSection() {
+    // Setup phase selector for Medical Affairs tab
+    document.querySelectorAll('#medical .phase-selector .btn').forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            document.querySelectorAll('#medical .phase-selector .btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Get the phase from data attribute
+            const phase = this.getAttribute('data-phase');
+            
+            // Hide all phase content
+            document.querySelectorAll('#medical .phase-content').forEach(content => {
+                content.classList.add('d-none');
+            });
+            
+            // Show the selected phase content
+            document.getElementById(`medical-${phase}`).classList.remove('d-none');
+        });
+    });
+    
+    // Add similar functionality for R&D and Marketing tabs when their content is implemented
+}
+
 // Initialize the application when document is loaded
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize the navigation
@@ -2454,4 +2483,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeCompetitiveIntelCharts();
         initializePostCongressCharts();
     }, 500);
+    
+    // Initialize AI Features section
+    initializeAIFeaturesSection();
 });

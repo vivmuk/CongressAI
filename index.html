@@ -67,6 +67,10 @@
                     <i class="bi bi-journal-check"></i>
                     <span>Post-Congress</span>
                 </button>
+                <button class="nav-item" data-section="ai-features-section">
+                    <i class="bi bi-cpu"></i>
+                    <span>AI Features</span>
+                </button>
             </div>
 
             <div class="sidebar-footer">
@@ -951,6 +955,354 @@
                                             </button>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI Features Section -->
+                <div id="ai-features-section" class="content-section">
+                    <div class="section-header">
+                        <h2>AI-Powered Congress Features</h2>
+                        <p>Leveraging LLMs to enhance every phase of congress planning, execution, and follow-up</p>
+                    </div>
+                    
+                    <div class="features-navigation mb-4">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <ul class="nav nav-pills" id="featuresTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="medical-tab" data-bs-toggle="pill" data-bs-target="#medical" type="button" role="tab" aria-controls="medical" aria-selected="true">
+                                        <i class="bi bi-heart-pulse me-2"></i>Medical Affairs
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="rd-tab" data-bs-toggle="pill" data-bs-target="#rd" type="button" role="tab" aria-controls="rd" aria-selected="false">
+                                        <i class="bi bi-flask me-2"></i>R&D / Clinical
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="marketing-tab" data-bs-toggle="pill" data-bs-target="#marketing" type="button" role="tab" aria-controls="marketing" aria-selected="false">
+                                        <i class="bi bi-megaphone me-2"></i>Marketing
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="featuresTabContent">
+                        <!-- Medical Affairs Tab -->
+                        <div class="tab-pane fade show active" id="medical" role="tabpanel" aria-labelledby="medical-tab">
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="phase-selector mb-4">
+                                        <div class="btn-group w-100">
+                                            <button class="btn btn-outline-primary active" data-phase="pre">Pre-Congress</button>
+                                            <button class="btn btn-outline-primary" data-phase="on">On-Site</button>
+                                            <button class="btn btn-outline-primary" data-phase="post">Post-Congress</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Pre-Congress Phase -->
+                            <div class="phase-content" id="medical-pre">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="card h-100 mb-4">
+                                            <div class="card-header bg-light">
+                                                <h5><i class="bi bi-list-check text-primary me-2"></i>High-Value Activities</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="activity-list">
+                                                    <li>Identify priority congresses & sessions</li>
+                                                    <li>Map KOLs/HCPs attending; schedule 1:1s</li>
+                                                    <li>Build scientific briefing book (data, positions, disclosure restrictions)</li>
+                                                    <li>Craft compliant discussion guides & slide decks</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="card mb-4">
+                                            <div class="card-header bg-light">
+                                                <h5><i class="bi bi-robot text-primary me-2"></i>LLM-Powered Features</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="features-list">
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-calendar-check"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>Calendar Optimizer</h6>
+                                                            <p>Flags "must-attend" sessions by therapeutic area & gap analysis</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-people-fill"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>KOLAttendee Detector</h6>
+                                                            <p>Cross-matches registration lists, PubMed, and social handles + meeting-slot allocator</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-journal-text"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>One-Click Briefing Book Generator</h6>
+                                                            <p>Creates summaries, key papers, talking-points, and questions to ask</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-shield-check"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>Compliance-Aware Prompt Builder</h6>
+                                                            <p>Generates compliant discussion guides with appropriate language</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header bg-light">
+                                                <h5><i class="bi bi-graph-up-arrow text-success me-2"></i>Tangible Impact</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="impact-item">
+                                                            <div class="impact-value">
+                                                                <i class="bi bi-check-circle-fill text-success"></i>
+                                                                More productive schedules
+                                                            </div>
+                                                            <div class="impact-desc">Fewer missed KOLs</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="impact-item">
+                                                            <div class="impact-chart">
+                                                                <div class="chart-container">
+                                                                    <div class="progress-label">Prep Time Reduction</div>
+                                                                    <div class="progress" style="height: 24px;">
+                                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 70%;">70%</div>
+                                                                    </div>
+                                                                    <div class="progress-sublabel">For briefing books</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- On-Site Phase -->
+                            <div class="phase-content d-none" id="medical-on">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="card h-100 mb-4">
+                                            <div class="card-header bg-light">
+                                                <h5><i class="bi bi-list-check text-primary me-2"></i>High-Value Activities</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="activity-list">
+                                                    <li>Real-time capture of oral/poster highlights</li>
+                                                    <li>Record & tag KOL interactions and questions</li>
+                                                    <li>Monitor competitor symposia & messaging</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="card mb-4">
+                                            <div class="card-header bg-light">
+                                                <h5><i class="bi bi-robot text-primary me-2"></i>LLM-Powered Features</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="features-list">
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-mic"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>Mobile Voice/Photo Transcriber</h6>
+                                                            <p>Transforms notes into structured data with ontology tagging</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-lightning"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>Instant "Key Takeaway" Summarizer</h6>
+                                                            <p>Converts session content into concise insights using speech-to-text + abstractive LLM</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-eye"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>Competitor-Intel Feed</h6>
+                                                            <p>Extracts claims & data points from live tweets / press releases</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header bg-light">
+                                                <h5><i class="bi bi-graph-up-arrow text-success me-2"></i>Tangible Impact</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="impact-item">
+                                                            <div class="impact-value">
+                                                                <i class="bi bi-speedometer text-success"></i>
+                                                                Faster insight turnaround
+                                                            </div>
+                                                            <div class="impact-desc">Same-day availability</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="impact-item">
+                                                            <div class="impact-value">
+                                                                <i class="bi bi-people text-success"></i>
+                                                                Central dashboard
+                                                            </div>
+                                                            <div class="impact-desc">Keeps dispersed teams aligned in real time</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Post-Congress Phase -->
+                            <div class="phase-content d-none" id="medical-post">
+                                <div class="row">
+                                    <div class="col-lg-5">
+                                        <div class="card h-100 mb-4">
+                                            <div class="card-header bg-light">
+                                                <h5><i class="bi bi-list-check text-primary me-2"></i>High-Value Activities</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="activity-list">
+                                                    <li>Aggregate & cluster insights</li>
+                                                    <li>Map insights to strategic pillars & evidence gaps</li>
+                                                    <li>Draft follow-up emails / slide updates</li>
+                                                    <li>Feed CRM & insight repositories</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div class="card mb-4">
+                                            <div class="card-header bg-light">
+                                                <h5><i class="bi bi-robot text-primary me-2"></i>LLM-Powered Features</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="features-list">
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-collection"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>Insight-Clustering Workbench</h6>
+                                                            <p>Organizes insights with interactive heat-maps</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-arrows-angle-contract"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>Strategy-Alignment Recommender</h6>
+                                                            <p>Maps between ontologies and medical strategy</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-pencil-square"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>Auto-Draft Follow-Ups</h6>
+                                                            <p>Creates personalized follow-ups & slide refreshes</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="feature-item">
+                                                        <div class="feature-icon">
+                                                            <i class="bi bi-database-check"></i>
+                                                        </div>
+                                                        <div class="feature-content">
+                                                            <h6>API Integration</h6>
+                                                            <p>Push to Veeva / IQVIA with data-quality validation</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="card">
+                                            <div class="card-header bg-light">
+                                                <h5><i class="bi bi-graph-up-arrow text-success me-2"></i>Tangible Impact</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="impact-item align-items-center">
+                                                    <div class="impact-icon me-3">
+                                                        <i class="bi bi-clock-history text-success fs-1"></i>
+                                                    </div>
+                                                    <div>
+                                                        <div class="impact-value">Closed insight loop within 24 hours</div>
+                                                        <div class="impact-comparison">vs. 1-2 weeks traditionally</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- R&D / Clinical Tab -->
+                        <div class="tab-pane fade" id="rd" role="tabpanel" aria-labelledby="rd-tab">
+                            <!-- Content similar to Medical Affairs but for R&D -->
+                            <div class="placeholder-text py-5 text-center">
+                                <i class="bi bi-flask display-1 text-muted mb-3"></i>
+                                <h4>R&D/Clinical AI Features</h4>
+                                <p class="text-muted">Select a phase to view AI features for R&D and Clinical teams.</p>
+                                <div class="btn-group mt-3">
+                                    <button class="btn btn-outline-primary">Pre-Congress</button>
+                                    <button class="btn btn-outline-primary">On-Site</button>
+                                    <button class="btn btn-outline-primary">Post-Congress</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Marketing Tab -->
+                        <div class="tab-pane fade" id="marketing" role="tabpanel" aria-labelledby="marketing-tab">
+                            <!-- Content similar to Medical Affairs but for Marketing -->
+                            <div class="placeholder-text py-5 text-center">
+                                <i class="bi bi-megaphone display-1 text-muted mb-3"></i>
+                                <h4>Marketing AI Features</h4>
+                                <p class="text-muted">Select a phase to view AI features for Marketing and Commercial teams.</p>
+                                <div class="btn-group mt-3">
+                                    <button class="btn btn-outline-primary">Pre-Congress</button>
+                                    <button class="btn btn-outline-primary">On-Site</button>
+                                    <button class="btn btn-outline-primary">Post-Congress</button>
                                 </div>
                             </div>
                         </div>
