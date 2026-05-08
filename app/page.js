@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState, useRef, useCallback } from "react";
 import Chart from "chart.js/auto";
 import * as d3 from "d3";
+import ErrorBoundary from "./components/ErrorBoundary";
 import styles from "../styles/Home.module.css";
 
 const DEFAULT_MODEL = "kimi-k2-5";
@@ -700,8 +701,8 @@ export default function Home() {
       const res = await fetch(`/api/get?id=${id}`);
       if (!res.ok) throw new Error("Failed to load");
       const data = await res.json();
-      setAgendaJson(data);
-      setSummary(data?.highlights?.join("\n") || "");
+      setAgendaJson(data.data || data);
+      setSummary((data.data || data)?.highlights?.join("\n") || "");
       setSavedId(id);
       setSessionEmbeddings(null); setSemanticResults([]);
       setActiveTab("agenda");
@@ -802,7 +803,7 @@ export default function Home() {
     try {
       const res = await fetch("/api/export/briefing", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ congressData: agendaJson, format: "html" }),
+        body: JSON.stringify({ congressData: agendaJson, format: "markdown" }),
       });
       const data = await res.json();
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
@@ -1855,6 +1856,7 @@ export default function Home() {
   };
 
   return (
+    <ErrorBoundary>
     <div className={styles.appShell}>
       {/* Mobile hamburger */}
       <button className={styles.hamburger} onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -1950,5 +1952,6 @@ export default function Home() {
         {tabRenderers[activeTab]?.()}
       </main>
     </div>
+    </ErrorBoundary>
   );
 }

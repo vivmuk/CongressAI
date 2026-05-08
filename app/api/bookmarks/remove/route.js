@@ -1,6 +1,6 @@
 import { initDb, getPool } from "@/lib/db";
 
-export async function DELETE(req) {
+export async function POST(req) {
   try {
     await initDb();
     const { id } = await req.json();

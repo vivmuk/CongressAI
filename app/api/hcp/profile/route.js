@@ -34,11 +34,11 @@ export async function POST(req) {
         profile.bio,
         profile.specialty,
         profile.influence_score,
-        JSON.stringify(profile.publications),
-        JSON.stringify(profile.clinical_trials),
-        JSON.stringify(profile.speaking_history),
+        profile.publications,
+        profile.clinical_trials,
+        profile.speaking_history,
         profile.topics,
-        JSON.stringify(profile.data),
+        profile.data,
       ]
     );
 

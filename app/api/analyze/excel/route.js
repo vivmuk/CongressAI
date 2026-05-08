@@ -1,5 +1,6 @@
 import { veniceChat } from "@/lib/venice";
 import { agendaSchemaDescription } from "@/lib/schema";
+import * as XLSX from "xlsx";
 
 export async function POST(req) {
   try {
@@ -17,12 +18,23 @@ export async function POST(req) {
       // Parse CSV using simple split
       text = parseCSV(buffer);
     } else if (filename.endsWith(".xlsx") || filename.endsWith(".xls")) {
-      // For xlsx, extract raw text content (binary) and send to Venice for structuring
-      // We can't parse xlsx without a library, so we extract what we can and use AI
-      text = buffer.toString("utf-8").replace(/[^\x20-\x7E\n\r\t]/g, " ").replace(/\s+/g, " ").trim();
-      // Filter to just readable content
-      const lines = text.split(/\n/).filter((l) => l.trim().length > 10);
-      text = lines.join("\n");
+      // Parse XLSX using SheetJS
+      const workbook = XLSX.read(buffer, { type: "array" });
+      const sheetsText = [];
+      for (const sheetName of workbook.SheetNames) {
+        const worksheet = workbook.Sheets[sheetName];
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, { defval: "" });
+        if (jsonData.length === 0) continue;
+        sheetsText.push(`=== Sheet: ${sheetName} ===`);
+        // Get headers from first row
+        const headers = Object.keys(jsonData[0]);
+        sheetsText.push(headers.join(" | "));
+        sheetsText.push("-".repeat(headers.join(" | ").length));
+        for (const row of jsonData) {
+          sheetsText.push(headers.map((h) => String(row[h] ?? "")).join(" | "));
+        }
+      }
+      text = sheetsText.join("\n");
     } else {
       return Response.json({ error: "Unsupported file type. Please upload .csv or .xlsx files." }, { status: 400 });
     }
